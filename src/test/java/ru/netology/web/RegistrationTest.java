@@ -22,7 +22,7 @@ class RegistrationTest {
     }
 
     @Test
-    void shouldRegisterByAccountNumberDOMModification() {
+    void shouldBookAnAppoinmentSetValue() {
         String planningDate = generateDate(4, "dd.MM.yyyy");
 
         open("http://localhost:9999");
@@ -39,7 +39,7 @@ class RegistrationTest {
     }
 
     @Test
-    void shouldRegisterByAccountNumberVisibilityChange() {
+    void shouldBookAnAppoinmentPopupMenu() {
         String planningDate = generateDate(7, "d");
 
         open("http://localhost:9999");
