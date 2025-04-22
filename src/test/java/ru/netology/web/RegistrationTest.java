@@ -40,14 +40,21 @@ class RegistrationTest {
 
     @Test
     void shouldBookAnAppoinmentPopupMenu() {
-        String planningDate = generateDate(7, "d");
+        int days = 7;       // Количество пропускаемых дней
+        String planningDate = generateDate(days, "dd.MM.yyyy"); // Переменные для определения
+        String day = generateDate(days, "d");                   // числа и месяца, на которые
+        String planningMonth = generateDate(days, "MM");        // забронируем встречу
+        String month = generateDate(0, "MM");             // Текущий месяц
 
         open("http://localhost:9999");
         SelenideElement formElement = $("form");
         formElement.$("[data-test-id='city'] input").setValue("Ек");
-        $(Selectors.withText("Екатеринбург")).click();
+        $(".popup_visible").$(Selectors.withText("Екатеринбург")).click();
         formElement.$(".icon-button").click();
-        $(Selectors.withText(planningDate)).click();
+        if (!month.equals(planningMonth)) {
+            $(".popup_visible").$("[data-step='1']").click();
+        };
+        $(".popup_visible").$(Selectors.withText(day)).click();
         formElement.$("[data-test-id='name'] input").setValue("Иванов Иван");
         formElement.$("[data-test-id='phone'] input").setValue("+79600000000");
         formElement.$("[data-test-id='agreement']").click();
